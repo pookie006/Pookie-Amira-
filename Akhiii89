@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday Amira 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #ffe0ec, #f9c5d1, #fcdada);
+      font-family: 'Poppins', sans-serif;
+      color: #4d0039;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      text-align: center;
+      flex-direction: column;
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 4rem;
+      color: #ff66a3;
+      margin-bottom: 0.5rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: #660033;
+    }
+
+    #countdown {
+      font-size: 1.8rem;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .cake-card {
+      margin-top: 1rem;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 1.5rem;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 20px rgba(255, 192, 203, 0.4);
+      animation: slideUp 2s ease-out forwards;
+    }
+
+    .cake {
+      width: 260px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+    }
+
+    .candles {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+    }
+
+    .candle {
+      width: 12px;
+      height: 40px;
+      background: #fff;
+      border-radius: 5px;
+      position: relative;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    .flame {
+      position: absolute;
+      top: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 12px;
+      height: 18px;
+      background: radial-gradient(circle, #ffa500 0%, #ff4500 100%);
+      border-radius: 50%;
+      animation: flicker 0.3s infinite alternate;
+      box-shadow: 0 0 10px rgba(255, 165, 0, 0.7);
+    }
+
+    .flowers {
+      position: absolute;
+      bottom: 50px;
+      display: flex;
+      gap: 100px;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .flower {
+      width: 60px;
+      height: 60px;
+      background: radial-gradient(circle, #ffc0cb 0%, #ff69b4 100%);
+      border-radius: 50%;
+      box-shadow: 0 0 25px rgba(255, 182, 193, 0.8);
+      animation: spin 10s linear infinite;
+    }
+
+    .wish {
+      font-size: 1.4rem;
+      margin-top: 2rem;
+      animation: fadeIn 2s ease-in;
+      font-weight: 500;
+      line-height: 1.6;
+      color: #660033;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes flicker {
+      0% { opacity: 0.8; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.2); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="before-birthday">
+    <h1>Hi My Lovely Amira 💖</h1>
+    <h2>Your surprise is waiting...</h2>
+    <div id="countdown"></div>
+  </div>
+
+  <div id="birthday-surprise" class="hidden">
+    <div class="cake-card">
+      <div class="candles">
+        <div class="candle" onclick="blow(this)"><div class="flame"></div></div>
+        <div class="candle" onclick="blow(this)"><div class="flame"></div></div>
+        <div class="candle" onclick="blow(this)"><div class="flame"></div></div>
+      </div>
+      <img class="cake" src="https://cdn.pixabay.com/photo/2022/10/30/14/33/cake-7558567_960_720.jpg" alt="Birthday Cake">
+    </div>
+
+    <div class="flowers">
+      <div class="flower"></div>
+      <div class="flower"></div>
+    </div>
+
+    <div class="wish">
+      🎂 Happy Birthday, Amira! <br>
+      You are the candle to my cake, the smile to my face, and the sparkle to my soul. <br>
+      May your day be as magical as your heart. 💕
+    </div>
+  </div>
+
+  <script>
+    const targetDate = new Date("September 30, 2025 00:00:00").getTime();
+
+    const countdownEl = document.getElementById("countdown");
+    const beforeBirthday = document.getElementById("before-birthday");
+    const birthdaySurprise = document.getElementById("birthday-surprise");
+
+    const updateCountdown = () => {
+      const now = new Date().getTime();
+      const gap = targetDate - now;
+
+      if (gap <= 0) {
+        beforeBirthday.classList.add("hidden");
+        birthdaySurprise.classList.remove("hidden");
+        clearInterval(timer);
+        return;
+      }
+
+      const days = Math.floor(gap / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((gap % (1000 * 60)) / 1000);
+
+      countdownEl.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    };
+
+    function blow(candle) {
+      const flame = candle.querySelector(".flame");
+      flame.style.display = "none";
+    }
+
+    const timer = setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+</body>
+</html>
